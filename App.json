@@ -1,0 +1,24 @@
+{
+    "stagiere": [
+        {
+            "nom": "Camara",
+            "prénom": "Moussa",
+            "moyenne": [10, 14, 18]
+        },
+        {
+            "nom": "nom2",
+            "prénom": "Vanessa",
+            "moyenne": [14,17,20]
+        },
+        {
+            "nom": "nom3",
+            "prénom": "Jean",
+            "moyenne": [1,8,15]
+        },
+        {
+            "nom": "nom4",
+            "prénom": "Afpa",
+            "moyenne": [1,5,9]
+        }
+    ]
+}

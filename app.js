@@ -32,6 +32,9 @@ var produit = [
     }
 ];
 
+let regExpname = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]+$/;
+let regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+let regExphone =/^(?:(?:(?:\+|00)33\D?(?:\D?\(0\)\D?)?)|0){1}[1-9]{1}(?:\D?\d{2}){4}$/
 
 $(document).ready(function () {
     (function () {
@@ -66,24 +69,63 @@ $(document).ready(function () {
             prix = extraitNombre($($(valueOfElement).find("label")[1]).attr("value"));;
             prix = prix * parseInt($(valueOfElement).find("input").val());
             $($(valueOfElement).find("label")[1]).text("prix: " + prix);
-            total+=prix;
+            total += prix;
         });
         console.log(total);
-        $(".total_panier span").text("Total = " + total) 
+        $(".total_panier span").text("Total = " + total)
         $(".panier")
-        
+
     });
-    
-    $(".validerinfo").click(function (e) { 
+
+    $(".validerinfo").click(function (e) {
         e.preventDefault();
-        $.each($("form input"), function (indexInArray, valueOfElement) { 
+        $(".paniervalide .card").remove();
+        $.each($("form input"), function (indexInArray, valueOfElement) {
             (valueOfElement.value);
             $($("b")[indexInArray]).text(valueOfElement.value)
         });
-        
+
         $.each($(".produit_panier"), function (indexInArray, valueOfElement) {
-            $(".paniervalide").append("<div class='card';'><div class='card-body g-0 produit_panier'><div><h5 class='card-title'>" + $($(".produit_panier")[indexInArray]).find("h5").text() + "</h5></div><div class='row'><label class='col-6'><label with=auto>quantité : </label><b>"+ $($(".produit_panier")[indexInArray]).find("input").val() +"</b></label>" + $($($(".produit_panier")[indexInArray]).find("label")[1]).text() + "</label></div></div></div>");
+            $(".paniervalide").append("<div class='card'> <div class='card-body g-0 produit_panier'><div><h5 class='card-title'>" + $($(".produit_panier")[indexInArray]).find("h5").text() + "</h5></div><div class='row'><label class='col-6'><label with=auto>quantité : </label><b>" + $($(".produit_panier")[indexInArray]).find("input").val() + "</b></label>" + $($($(".produit_panier")[indexInArray]).find("label")[1]).text() + "</label></div></div></div>");
         });
     });
+
+    $("#inputName").keyup(function (e) {
+        if (!regExpname.test($("#inputName").val())) {
+            $(this).addClass("btn-danger");
+        }
+        else{
+            $(this).removeClass("btn-danger");
+
+        }
+    })
+    $("#inputFirstName").keyup(function (e) {
+        if (!regExpname.test($("#inputFirstName").val())) {
+            $(this).addClass("btn-danger");
+        }
+        else{
+            $(this).removeClass("btn-danger");
+
+        }
+    });
+    $("#inputEmail").keyup(function (e) {
+        if (!regEmail.test($("#inputEmail").val())) {
+            $(this).addClass("btn-danger");
+        }
+        else{
+            $(this).removeClass("btn-danger");
+
+        }
+    });
+    $("#inputTel").keyup(function (e) {
+        if (!regExphone.test($("#inputTel").val())) {
+            $(this).addClass("btn-danger");
+        }
+        else{
+            $(this).removeClass("btn-danger");
+
+        }
+    });
+
     function extraitNombre(str) { return Number(str.replace(/[^\d]/g, "")) }
 })
